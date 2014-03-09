@@ -1,0 +1,30 @@
+<html>
+<head>
+<script>
+var number;
+var w = window.innerWidth;
+var h = window.innerHeight;
+
+function repeat() 
+{
+	//number = Math.floor(Math.random()*1000);
+	numberw = Math.floor(Math.random()* w);
+	numberh = Math.floor(Math.random()* h);
+	number = numberw + numberh;
+	bin_num = number.toString(2); 
+	//document.getElementById('txt').innerHTML= bin_num;
+	document.getElementById('txt').innerHTML= number;
+	document.getElementById('txt').style.marginTop=numberh;
+	document.getElementById('txt').style.marginLeft=numberw;
+	tim = setTimeout(function(){repeat()}, 3*number);
+}
+</script>
+</head>
+<body onload="repeat()">
+<div id="txt"></div>
+
+<canvas id="myCanvas" width="200" height="100"
+style="border:1px solid #000000;">
+</canvas>
+</body>
+</html>
