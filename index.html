@@ -2,29 +2,56 @@
 <head>
 <script>
 var number;
-var w = window.innerWidth;
-var h = window.innerHeight;
+//var w = window.innerWidth;
+//var h = window.innerHeight;
+var w = 600;
+var h = 600;
+var prevX = 0;
+var prevY = 0;
+var currX = 0;
+var currY = 0;
 
 function repeat() 
 {
-	//number = Math.floor(Math.random()*1000);
 	numberw = Math.floor(Math.random()* w);
 	numberh = Math.floor(Math.random()* h);
+	prevX = numberw;
+	prevY = numberh;
 	number = numberw + numberh;
 	bin_num = number.toString(2); 
-	//document.getElementById('txt').innerHTML= bin_num;
 	document.getElementById('txt').innerHTML= number;
 	document.getElementById('txt').style.marginTop=numberh;
 	document.getElementById('txt').style.marginLeft=numberw;
 	tim = setTimeout(function(){repeat()}, 3*number);
 }
+
+function canvdraw()
+{
+	var c = document.getElementById("myCanvas");
+	var ctx = c.getContext("2d");
+	for (var i=0; i<5; i++) {
+		numberw = Math.floor(Math.random()* w);
+		numberh = Math.floor(Math.random()* h);
+		ctx.beginPath();
+		ctx.moveTo(prevX, prevY);
+		ctx.lineTo(numberw, numberh);
+		ctx.stroke();
+		prevX = numberw;
+		prevY = numberh;
+	}
+}
+
+function start() {
+	repeat();
+	canvdraw();
+}
 </script>
 </head>
-<body onload="repeat()">
-<div id="txt"></div>
-
-<canvas id="myCanvas" width="200" height="100"
+<body onload="start()">
+<canvas id="myCanvas" width="600" height="600"
 style="border:1px solid #000000;">
 </canvas>
+<div id="txt"></div>
+
 </body>
 </html>
