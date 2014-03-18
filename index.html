@@ -32,6 +32,24 @@ function getRand()
 	return posxy;
 }
 
+function getRandBin()
+{
+	var posxy = Math.floor((Math.random() - 0.5) * 10);
+	if (posxy > 0)
+	{
+		posxy = 10;
+	}
+	else if (posxy < 0)
+	{
+		posxy = -10;
+	}
+	else
+	{
+		posxy = 0;
+	}
+	return posxy;
+}
+
 function canvDraw(posD)
 {
 	var c = document.getElementById("myCanvas");
@@ -76,12 +94,12 @@ function randWalk()
 		var pos = new Array;
 		pos[0] = Pos[2];
 		pos[1] = Pos[3];
-		pos[2] = Pos[0] + getRand();
+		pos[2] = Pos[0] + getRandBin();
 		if (pos[2] < 0 )
 		{
 			pos[2] = Math.abs(pos[2]);
 		}
-		pos[3] = Pos[1] + getRand();
+		pos[3] = Pos[1] + getRandBin();
 		if (pos[3] < 0 )
 		{
 			pos[3] = Math.abs(pos[3]);
@@ -96,7 +114,6 @@ function randWalk()
 		pos[3] = getRand();
 	}
 	i = i + 1;
-	document.getElementById("txt").innerHTML = pos[2];
 	trackValue(pos);
 	Pos = canvDraw(pos);
 	tim = setTimeout(function(){randWalk()}, 1000);
