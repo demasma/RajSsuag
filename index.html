@@ -95,15 +95,23 @@ function randWalk()
 		var pos = new Array;
 		pos[0] = Pos[2];
 		pos[1] = Pos[3];
-		pos[2] = Pos[0] + getRandBin();
-		if (pos[2] < 0 )
+		if (Math.random() > 0.5)
 		{
-			pos[2] = Math.abs(pos[2]);
+			pos[2] = Pos[0] + getRandBin();
+			pos[3] = Pos[3];
+			if (pos[2] < 0 )
+			{
+				pos[2] = Math.abs(pos[2]);
+			}
 		}
-		pos[3] = Pos[1] + getRandBin();
-		if (pos[3] < 0 )
+		else
 		{
-			pos[3] = Math.abs(pos[3]);
+			pos[3] = Pos[1] + getRandBin();
+			pos[2] = Pos[2];
+			if (pos[3] < 0 )
+			{
+				pos[3] = Math.abs(pos[3]);
+			}
 		}
 	}
 	else
@@ -111,8 +119,8 @@ function randWalk()
 		var pos = new Array;
 		pos[0] = 0;
 		pos[1] = 0;	
-		pos[2] = getRand();
-		pos[3] = getRand();
+		pos[2] = getRandBin();
+		pos[3] = getRandBin();
 	}
 	i = i + 1;
 	trackValue(pos);
