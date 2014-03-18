@@ -1,5 +1,6 @@
 <html>
 <head>
+<title> Gauss Jar </title>
 <script>
 //var number;
 //var w = window.innerWidth * 0.95;
@@ -135,24 +136,24 @@ function start() {
 
 </script>
 </head>
-<body onload="start()">
 <body>
-<button type="button" onclick="randWalk()">Start</button>
-<button type="button" onclick="myStopFunction()">Stop</button>
-<div id="txt"></div>
-<canvas id="myCanvas" style="border:2px solid #000000;" width=1000 height=500>
-</canvas>
-<table id="myTable">
-<tr>
-	<th>x1</th>
-	<th>y1</th>
-	<th>x2</th>
-	<th>y2</th>
-	<th>&Delta;x</th>
-	<th>&Delta;y</th>
-</tr>
-</table>
-
-
+	<h1> Gauss Jar </h1>
+	<p> Random numbers are generated and a random-esque walk is plotted below. </p>
+	<p> Watch the coordinates added to the table below the canvas. </p>
+	<button type="button" onclick="randWalk()">Start</button>
+	<button type="button" onclick="myStopFunction()">Stop</button>
+	<div id="txt"></div>
+	<canvas id="myCanvas" style="border:2px solid #000000;" width=1000 height=500>
+	</canvas>
+	<table id="myTable">
+	<tr>
+		<th>x1</th>
+		<th>y1</th>
+		<th>x2</th>
+		<th>y2</th>
+		<th>&Delta;x</th>
+		<th>&Delta;y</th>
+	</tr>
+	</table>
 </body>
 </html>
