@@ -28,7 +28,7 @@ function repeat()
 
 function getRand()
 {
-	var posxy = Math.floor((Math.random() - 0.5) * 100);
+	var posxy = Math.floor((Math.random() - 0.5) * 10);
 	return posxy;
 }
 
@@ -102,7 +102,10 @@ function randWalk()
 	tim = setTimeout(function(){randWalk()}, 1000);
 }
 
-	
+function myStopFunction()
+{
+	clearTimeout(tim);
+}
 
 function start() {
 	var c = document.getElementById("myCanvas");
@@ -110,14 +113,15 @@ function start() {
 	//ctx.canvas.width  = window.innerWidth;
     //ctx.canvas.height = window.innerHeight;
 	repeat();
-	randWalk();
+	//randWalk();
 }
 
 </script>
 </head>
 <body onload="start()">
 <body>
-<button type="button" onclick="randWalk()">Do It</button>
+<button type="button" onclick="randWalk()">Start</button>
+<button type="button" onclick="myStopFunction()">Stop</button>
 <div id="txt"></div>
 <canvas id="myCanvas" style="border:2px solid #000000;" width=1000 height=500>
 </canvas>
