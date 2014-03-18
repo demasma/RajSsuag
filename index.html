@@ -1,57 +1,137 @@
 <html>
 <head>
 <script>
-var number;
-//var w = window.innerWidth;
-//var h = window.innerHeight;
-var w = 600;
-var h = 600;
-var prevX = 0;
-var prevY = 0;
-var currX = 0;
-var currY = 0;
+//var number;
+//var w = window.innerWidth * 0.95;
+//var h = window.innerHeight * 0.95;
+var i = 0;
+var Pos = new Array;
 
 function repeat() 
 {
-	numberw = Math.floor(Math.random()* w);
-	numberh = Math.floor(Math.random()* h);
-	prevX = numberw;
-	prevY = numberh;
-	number = numberw + numberh;
-	bin_num = number.toString(2); 
-	document.getElementById('txt').innerHTML= number;
-	document.getElementById('txt').style.marginTop=numberh;
-	document.getElementById('txt').style.marginLeft=numberw;
-	tim = setTimeout(function(){repeat()}, 3*number);
+//	numberw = Math.floor(Math.random()* w);
+//	numberh = Math.floor(Math.random()* h);
+//	prevX = numberw;
+//	prevY = numberh;
+//	number = numberw + numberh;
+//	bin_num = number.toString(2); 
+//	document.getElementById('txt').innerHTML= number;
+//	document.getElementById('txt').style.marginTop=numberh;
+//	document.getElementById('txt').style.marginLeft=numberw;
+//	tim = setTimeout(function(){repeat()}, 3*number);
 }
 
-function canvdraw()
+// have a number
+// get a new number
+// draw a line between the two points
+// repeat
+
+function getRand()
+{
+	var posxy = Math.floor((Math.random() - 0.5) * 100);
+	return posxy;
+}
+
+function canvDraw(posD)
 {
 	var c = document.getElementById("myCanvas");
 	var ctx = c.getContext("2d");
-	for (var i=0; i<5; i++) {
-		numberw = Math.floor(Math.random()* w);
-		numberh = Math.floor(Math.random()* h);
-		ctx.beginPath();
-		ctx.moveTo(prevX, prevY);
-		ctx.lineTo(numberw, numberh);
-		ctx.stroke();
-		prevX = numberw;
-		prevY = numberh;
-	}
+	var PosD = posD;
+	ctx.beginPath();
+	ctx.moveTo(posD[0], posD[1]);
+	ctx.lineTo(posD[2], posD[3]);
+	ctx.stroke();
+	return PosD;
 }
 
-function start() {
-	repeat();
-	canvdraw();
+function trackValue(posD)
+{
+	// Find a <table> element with id="myTable":
+	var table = document.getElementById("myTable");
+
+	// Create an empty <tr> element and add it to the 1st position of the table:
+	var row = table.insertRow(-1);
+
+	// Insert new cells (<td> elements) at the 1st and 2nd position of the "new" <tr> element:
+	var cell1 = row.insertCell(0);
+	var cell2 = row.insertCell(1);
+	var cell3 = row.insertCell(2);
+	var cell4 = row.insertCell(3);
+	var cell5 = row.insertCell(4);
+	var cell6 = row.insertCell(5);
+
+	// Add some text to the new cells:
+	cell1.innerHTML = posD[0];
+	cell2.innerHTML = posD[1];
+	cell3.innerHTML = posD[2];
+	cell4.innerHTML = posD[3];
+	cell5.innerHTML = posD[2] - posD[0];
+	cell6.innerHTML = posD[3] - posD[1];
 }
+
+function randWalk()
+{
+	if (i > 0)
+	{
+		var pos = new Array;
+		pos[0] = Pos[2];
+		pos[1] = Pos[3];
+		pos[2] = Pos[0] + getRand();
+		if (pos[2] < 0 )
+		{
+			pos[2] = Math.abs(pos[2]);
+		}
+		pos[3] = Pos[1] + getRand();
+		if (pos[3] < 0 )
+		{
+			pos[3] = Math.abs(pos[3]);
+		}
+	}
+	else
+	{
+		var pos = new Array;
+		pos[0] = 0;
+		pos[1] = 0;	
+		pos[2] = getRand();
+		pos[3] = getRand();
+	}
+	i = i + 1;
+	document.getElementById("txt").innerHTML = pos[2];
+	trackValue(pos);
+	Pos = canvDraw(pos);
+	tim = setTimeout(function(){randWalk()}, 1000);
+}
+
+	
+
+function start() {
+	var c = document.getElementById("myCanvas");
+	var ctx = c.getContext("2d");
+	//ctx.canvas.width  = window.innerWidth;
+    //ctx.canvas.height = window.innerHeight;
+	repeat();
+	randWalk();
+}
+
 </script>
 </head>
 <body onload="start()">
-<canvas id="myCanvas" width="600" height="600"
-style="border:1px solid #000000;">
-</canvas>
+<body>
+<button type="button" onclick="randWalk()">Do It</button>
 <div id="txt"></div>
+<canvas id="myCanvas" style="border:2px solid #000000;" width=1000 height=500>
+</canvas>
+<table id="myTable">
+<tr>
+	<th>x1</th>
+	<th>y1</th>
+	<th>x2</th>
+	<th>y2</th>
+	<th>&Delta;x</th>
+	<th>&Delta;y</th>
+</tr>
+</table>
+
 
 </body>
 </html>
